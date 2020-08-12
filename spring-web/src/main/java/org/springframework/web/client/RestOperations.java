@@ -77,6 +77,43 @@ public interface RestOperations {
 	<T> T getForObject(URI url, Class<T> responseType) throws RestClientException;
 
 	/**
+	 * Retrieve a representation by doing a GET on the specified URL.
+	 * The response (if any) is converted and returned.
+	 * <p>URI Template variables are expanded using the given URI variables, if any.
+	 * @param url the URL
+	 * @param request the Object for GET request, usually contains the header info here (may be {@code null})
+	 * @param responseType the type of the return value
+	 * @param uriVariables the map containing variables for the URI template
+	 * @return the converted object
+	 */
+	@Nullable
+	<T> T getForObject(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables) throws RestClientException;
+
+	/**
+	 * Retrieve a representation by doing a GET on the URI template.
+	 * The response (if any) is converted and returned.
+	 * <p>URI Template variables are expanded using the given map.
+	 * @param url the URL
+	 * @param request the Object for GET request, usually contains the header info here (may be {@code null})
+	 * @param responseType the type of the return value
+	 * @param uriVariables the map containing variables for the URI template
+	 * @return the converted object
+	 */
+	@Nullable
+	<T> T getForObject(String url, Object request, Class<T> responseType, Object... uriVariables)throws RestClientException;
+
+	/**
+	 * Retrieve a representation by doing a GET on the URL .
+	 * The response (if any) is converted and returned.
+	 * @param url the URL
+	 * @param request the Object for GET request, usually contains the header info here (may be {@code null})
+	 * @param responseType the type of the return value
+	 * @return the converted object
+	 */
+	@Nullable
+	<T> T getForObject(URI url, Object request, Class<T> responseType) throws RestClientException;
+
+	/**
 	 * Retrieve an entity by doing a GET on the specified URL.
 	 * The response is converted and stored in an {@link ResponseEntity}.
 	 * <p>URI Template variables are expanded using the given URI variables, if any.
@@ -112,6 +149,47 @@ public interface RestOperations {
 	 */
 	<T> ResponseEntity<T> getForEntity(URI url, Class<T> responseType) throws RestClientException;
 
+	/**
+	 * Retrieve an entity by doing a GET on the specified URL.
+	 * The response is converted and stored in an {@link ResponseEntity}.
+	 * <p>URI Template variables are expanded using the given URI variables, if any.
+	 * @param url the URL
+	 * @param request the Object to be GETed, usually contains the header info here (may be {@code null})
+	 * @param responseType the type of the return value
+	 * @param uriVariables the variables to expand the template
+	 * @return the entity
+	 * @since 5.2.8
+	 */
+	<T> ResponseEntity<T> getForEntity(String url, @Nullable Object request, Class<T> responseType, Object... uriVariables)
+		throws RestClientException;
+
+	/**
+	 * Retrieve a representation by doing a GET on the URI template.
+	 * The response is converted and stored in an {@link ResponseEntity}.
+	 * <p>URI Template variables are expanded using the given map.
+	 * @param url the URL
+	 * @param request the Object to be GETed, usually contains the header info here (may be {@code null})
+	 * @param responseType the type of the return value
+	 * @param uriVariables the map containing variables for the URI template
+	 * @return the entity
+	 * @since 5.2.8
+	 */
+	<T> ResponseEntity<T> getForEntity(String url, @Nullable Object request, Class<T> responseType, Map<String, ?> uriVariables)
+		throws RestClientException;
+
+	/**
+	 * Retrieve a representation by doing a GET on the URL .
+	 * The response is converted and stored in an {@link ResponseEntity}.
+	 * @param url the URL
+	 * @param request the Object to be GETed, usually contains the header info here (may be {@code null})
+	 * @param responseType the type of the return value
+	 * @param uriVariables the variables to expand the template
+	 * @return the entity
+	 * @since 5.2.8
+	 */
+	<T> ResponseEntity<T> getForEntity(URI url, @Nullable Object request, Class<T> responseType)
+		throws RestClientException;
+	
 
 	// HEAD
 

@@ -247,6 +247,33 @@ public class AsyncRestTemplate extends org.springframework.http.client.support.I
 		return execute(url, HttpMethod.GET, requestCallback, responseExtractor);
 	}
 
+	@Override
+	public <T> ListenableFuture<ResponseEntity<T>> getForEntity(String url, @Nullable HttpEntity<?> request,
+			Class<T> responseType, Object... uriVariables) throws RestClientException {
+
+		AsyncRequestCallback requestCallback = httpEntityCallback(request, responseType);
+		ResponseExtractor<ResponseEntity<T>> responseExtractor = responseEntityExtractor(responseType);
+		return execute(url, HttpMethod.GET, requestCallback, responseExtractor, uriVariables);
+	}
+
+	@Override
+	public <T> ListenableFuture<ResponseEntity<T>> getForEntity(String url, @Nullable HttpEntity<?> request,
+			Class<T> responseType, Map<String, ?> uriVariables) throws RestClientException {
+
+		AsyncRequestCallback requestCallback = httpEntityCallback(request, responseType);
+		ResponseExtractor<ResponseEntity<T>> responseExtractor = responseEntityExtractor(responseType);
+		return execute(url, HttpMethod.GET, requestCallback, responseExtractor, uriVariables);
+	}
+
+	@Override
+	public <T> ListenableFuture<ResponseEntity<T>> getForEntity(URI url,
+			@Nullable HttpEntity<?> request, Class<T> responseType) throws RestClientException {
+
+		AsyncRequestCallback requestCallback = httpEntityCallback(request, responseType);
+		ResponseExtractor<ResponseEntity<T>> responseExtractor = responseEntityExtractor(responseType);
+		return execute(url, HttpMethod.GET, requestCallback, responseExtractor);
+	}
+
 
 	// HEAD
 

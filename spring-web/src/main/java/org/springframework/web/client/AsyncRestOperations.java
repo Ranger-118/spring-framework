@@ -85,6 +85,44 @@ public interface AsyncRestOperations {
 	<T> ListenableFuture<ResponseEntity<T>> getForEntity(URI url, Class<T> responseType)
 			throws RestClientException;
 
+	/**
+	 * Asynchronously retrieve an entity by doing a GET on the specified URL.
+	 * The response is converted and stored in an {@link ResponseEntity}.
+	 * <p>URI Template variables are expanded using the given URI variables, if any.
+	 * @param url the URL
+	 * @param request  the HttpEntity for GET request, usually contains the header info here (may be {@code null})
+	 * @param uriVariables the variables to expand the template
+	 * @return the entity wrapped in a {@link Future}
+	 * @see org.springframework.http.HttpEntity
+	 */
+	<T> ListenableFuture<ResponseEntity<T>> getForEntity(String url, @Nullable HttpEntity<?> request,
+			Class<T> responseType, Object... uriVariables) throws RestClientException;
+
+	/**
+	 * Asynchronously retrieve a representation by doing a GET on the URI template.
+	 * The response is converted and stored in an {@link ResponseEntity}.
+	 * <p>URI Template variables are expanded using the given map.
+	 * @param url the URL
+	 * @param request  the HttpEntity for GET request, usually contains the header info here (may be {@code null})
+	 * @param uriVariables the variables to expand the template
+	 * @return the entity wrapped in a {@link Future}
+	 * @see org.springframework.http.HttpEntity
+	 */
+	<T> ListenableFuture<ResponseEntity<T>> getForEntity(String url, @Nullable HttpEntity<?> request,
+			Class<T> responseType, Map<String, ?> uriVariables) throws RestClientException;
+
+	/**
+	 * Asynchronously retrieve a representation by doing a GET on the URL.
+	 * The response is converted and stored in an {@link ResponseEntity}.
+	 * @param url the URL
+	 * @param request the HttpEntity for GET request, usually contains the header info here (may be {@code null})
+	 * @return the entity wrapped in a {@link Future}
+	 * @see org.springframework.http.HttpEntity
+	 */
+	<T> ListenableFuture<ResponseEntity<T>> getForEntity(URI url, @Nullable HttpEntity<?> request,
+			Class<T> responseType) throws RestClientException;
+
+
 
 	// HEAD
 
